@@ -47,16 +47,16 @@ def usersignup(request):
 @unauthenticated_user
 def userlogin(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
             return redirect('homepage')
         else:
-            messages.info(request, 'Email or Password is incorrect!')
+            messages.info(request, 'Username or Password is incorrect!')
 
     context = {}
     return render (request, 'base/login.html', context)
